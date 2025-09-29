@@ -105,11 +105,32 @@
   const gift = document.getElementById('gift');
   const videoPlayer = document.getElementById('videoPlayer');
 
+  // Função para abrir o vídeo em tela cheia
+  function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { // Firefox
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { // Chrome, Safari e Opera
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { // IE/Edge
+      elem.msRequestFullscreen();
+    }
+  }
+
+  // Ao clicar no presente
   gift.addEventListener('click', () => {
     gift.classList.add('open');
     videoPlayer.play();
+    openFullscreen(videoPlayer);
+  });
+
+  // Quando o vídeo terminar, recarregar a página
+  videoPlayer.addEventListener('ended', () => {
+    location.reload();
   });
 </script>
 
 </body>
 </html>
+
